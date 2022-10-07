@@ -354,6 +354,17 @@ class ETAPI:
         content = self.get_note_content(noteId)
         return content
 
+    def get_day_note_id(self, date):
+        """
+        get note content by date
+        :param date: date string in format of "%Y-%m-%d", e.g. "2022-02-25"
+        :return:
+        """
+        url = f'{self.server_url}/etapi/calendar/days/{date}'
+        res = requests.get(url, headers=self.get_header())
+        noteId = res.json()['noteId']
+        return noteId
+
     def set_day_note(self, date, content):
         url = f'{self.server_url}/etapi/calendar/days/{date}'
         res = requests.get(url, headers=self.get_header())
